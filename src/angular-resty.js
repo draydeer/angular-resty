@@ -154,7 +154,7 @@
                     function Resty(base, routes) {
                         this.base = base;
                         this.compiledRoutes = {};
-                        this.defaults = null;
+                        this.defaults = {};
                         this.errorHandler = null;
                         this.onAfterRequest = null;
                         this.onBeforeRequest = null;

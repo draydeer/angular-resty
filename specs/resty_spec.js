@@ -46,20 +46,6 @@ describe('Resty', function() {
             expect(r.compiledRoutes.test2 instanceof $resty.Route).toBe(true);
 
             expect(r.compiledRoutes.test3 instanceof $resty.Route).toBe(true);
-
-            /*
-            var r = $resty(baseUrl, {
-                'test1': 'test1/:id?:di',
-                'test2': ['test2/:id?:di'],
-                'test3': ['test3/:id?:di', 'post', true, {di: 2}],
-                'test4': ['test4/:id?:di', 'post', false, {di: 2}],
-                'test5': {route: 'test5/:id?:di'},
-                'test6': {route: 'test6/:id?:di', appendParams: true, compileStrictly: true, defaults: {di: 2}, method: 'post'},
-                'test7': {route: 'test7/:id?:di', appendParams: false, compileStrictly: false, defaults: {di: 2}, method: 'post'}
-            });
-
-            expect(r.compiledRoutes.test1 instanceof $resty.Route).toBe(false);
-            */
         });
 
         it("should add valid route defined as string", function () {
@@ -74,6 +60,96 @@ describe('Resty', function() {
                 true,
                 {},
                 'get'
+            );
+        });
+
+        it("should add valid route defined as array with only path", function () {
+            var r = $resty(baseUrl, {
+                'test1': ['test1/:id?di=:di']
+            });
+
+            checkRouteConfiguration(
+                r.compiledRoutes.test1,
+                baseUrlNormalized + '/' + 'test1/!@$#id#$@!?di=!@$#di#$@!',
+                false,
+                true,
+                {},
+                'get'
+            );
+        });
+
+        it("should add valid route defined as array with parameters", function () {
+            var r = $resty(baseUrl, {
+                'test1': ['test1/:id?di=:di', 'post', true, {di: 2}]
+            });
+
+            checkRouteConfiguration(
+                r.compiledRoutes.test1,
+                baseUrlNormalized + '/' + 'test1/!@$#id#$@!?di=!@$#di#$@!',
+                true,
+                true,
+                {di: 2},
+                'post'
+            );
+        });
+
+        it("should add valid route defined as array with parameters", function () {
+            var r = $resty(baseUrl, {
+                'test1': ['test1/:id?di=:di', 'post', false, {di: 2}]
+            });
+
+            checkRouteConfiguration(
+                r.compiledRoutes.test1,
+                baseUrlNormalized + '/' + 'test1/!@$#id#$@!?di=!@$#di#$@!',
+                false,
+                true,
+                {di: 2},
+                'post'
+            );
+        });
+
+        it("should add valid route defined as object with only path", function () {
+            var r = $resty(baseUrl, {
+                'test1': {path: 'test1/:id?di=:di'}
+            });
+
+            checkRouteConfiguration(
+                r.compiledRoutes.test1,
+                baseUrlNormalized + '/' + 'test1/!@$#id#$@!?di=!@$#di#$@!',
+                false,
+                true,
+                {},
+                'get'
+            );
+        });
+
+        it("should add valid route defined as object with parameters", function () {
+            var r = $resty(baseUrl, {
+                'test1': {path: 'test1/:id?di=:di', appendParams: true, compileStrictly: true, defaults: {di: 2}, method: 'post'}
+            });
+
+            checkRouteConfiguration(
+                r.compiledRoutes.test1,
+                baseUrlNormalized + '/' + 'test1/!@$#id#$@!?di=!@$#di#$@!',
+                true,
+                true,
+                {di: 2},
+                'post'
+            );
+        });
+
+        it("should add valid route defined as object with parameters", function () {
+            var r = $resty(baseUrl, {
+                'test1': {path: 'test1/:id?di=:di', appendParams: false, compileStrictly: false, defaults: {di: 2}, method: 'post'}
+            });
+
+            checkRouteConfiguration(
+                r.compiledRoutes.test1,
+                baseUrlNormalized + '/' + 'test1/!@$#id#$@!?di=!@$#di#$@!',
+                false,
+                false,
+                {di: 2},
+                'post'
             );
         });
     });
