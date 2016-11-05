@@ -1,0 +1,30 @@
+{
+  "name": "angular-resty",
+  "description": "Simple REST client for AngularJs.",
+  "version": "0.0.1",
+  "filename": "angular-resty.min.js",
+  "main": "./dist/angular-resty.min.js",
+  "homepage": "https://github.com/draydeer/angular-resty",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/draydeer/angular-resty.git"
+  },
+  "engines": {
+    "node": ">= 0.9"
+  },
+  "dependencies": {
+    "angular": ">=1.4.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.8",
+    "express": "^4.14.0",
+    "jasmine-node": "^1.14.5",
+    "karma": "^1.3.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.2"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "karma start karma.conf"
+  }
+}

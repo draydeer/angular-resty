@@ -1,0 +1,13 @@
+sudo: false
+language: node_js
+node_js:
+  - stable
+install:
+  - apt-get install phantomjs
+  - npm install -g pm2
+before_script:
+  - pm2 start start.server.sh
+script:
+  - npm run coveralls
+after_script:
+  - pm2 stop start.server.sh
