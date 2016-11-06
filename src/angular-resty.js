@@ -78,7 +78,10 @@
                                 if (url) {
                                     forEach(this.routeParams, function (v) {
                                         if (v in params && params[v] !== void 0) {
-                                            url = url.replace('!@$#' + v + '#$@!', params[v] !== null ? params[v].toString() : '');
+                                            url = url.replace('!@$#' + v + '#$@!', params[v] !== null
+                                                ? params[v].toString()
+                                                : ''
+                                            );
 
                                             used[v] = true;
                                         } else {
@@ -92,7 +95,10 @@
                                 if (q) {
                                     forEach(this.routeParams, function (v) {
                                         if (v in params && params[v] !== void 0) {
-                                            q = q.replace('!@$#' + v + '#$@!', params[v] !== null ? encodeURIComponent(params[v].toString()) : '');
+                                            q = q.replace('!@$#' + v + '#$@!', params[v] !== null
+                                                ? encodeURIComponent(params[v].toString())
+                                                : ''
+                                            );
 
                                             used[v] = true;
                                         } else {
@@ -189,7 +195,7 @@
                         },
 
                         setErrorHandler: function (value) {
-                            if (angular.isFunction(handler)) {
+                            if (angular.isFunction(value)) {
                                 this.errorHandler = value;
 
                                 return this;
@@ -199,7 +205,7 @@
                         },
 
                         setSuccessHandler: function (value) {
-                            if (angular.isFunction(handler)) {
+                            if (angular.isFunction(value)) {
                                 this.successHandler = value;
 
                                 return this;
@@ -218,9 +224,9 @@
                             throw new Error('Invalid [on after request] handler.');
                         },
 
-                        setOnBeforeRequest: function (handler) {
-                            if (angular.isFunction(handler)) {
-                                this.onBeforeRequest = handler;
+                        setOnBeforeRequest: function (value) {
+                            if (angular.isFunction(value)) {
+                                this.onBeforeRequest = value;
 
                                 return this;
                             }
@@ -228,9 +234,9 @@
                             throw new Error('Invalid [on before request] handler.');
                         },
 
-                        setOnRequest: function (handler) {
-                            if (angular.isFunction(handler)) {
-                                this.onRequest = handler;
+                        setOnRequest: function (value) {
+                            if (angular.isFunction(value)) {
+                                this.onRequest = value;
 
                                 return this;
                             }
